@@ -11,8 +11,8 @@ using xiaoPage.Data;
 namespace xiaoPage.Migrations
 {
     [DbContext(typeof(ApplicationDb))]
-    [Migration("20240217082934_AddActorToDb")]
-    partial class AddActorToDb
+    [Migration("20240217131135_AddActorTableToDb")]
+    partial class AddActorTableToDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,11 +36,32 @@ namespace xiaoPage.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("ID");
 
                     b.ToTable("actors");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Birthday = 1990,
+                            Name = "Action"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Birthday = 2000,
+                            Name = "history"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Birthday = 1993,
+                            Name = "but"
+                        });
                 });
 #pragma warning restore 612, 618
         }
